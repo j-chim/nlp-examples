@@ -4,7 +4,8 @@ RUN apt-get update \
     && apt-get install -y --reinstall build-essential \
     && apt-get install -y gcc git git-lfs 
 
-ENV HOME_DIR /data
+ENV SYFERTEXT_BRANCH "syfertext_0.1.0"
+ENV HOME_DIR "/data"
 COPY . ${HOME_DIR}
 WORKDIR ${HOME_DIR}
 
@@ -18,7 +19,7 @@ RUN cd ${HOME_DIR}
 # SyferText
 RUN git lfs install \
     && pip install git+git://github.com/Nilanshrajput/syfertext_en_core_web_lg@master \
-    && git clone https://github.com/OpenMined/SyferText.git \
+    && git clone -b ${SYFERTEXT_BRANCH} https://github.com/j-chim/SyferText.git \
     && cd SyferText \
     && python setup.py install 
 
